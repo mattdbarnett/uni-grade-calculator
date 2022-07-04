@@ -38,12 +38,12 @@
             <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="15" Grid.ColumnSpan="2" Width="105">Add Module</Label>
 
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Name</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="250" Margin="10,0,0,0"/>
+            <TextBox Name="TxtbxModuleName" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="250" MaxLength="50" Margin="10,0,0,0"/>
 
             <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Credits</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="100" Margin="10,0,0,0"/>
+            <TextBox Name="TxtbxModuleCredits" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="100" MaxLength="3" Margin="10,0,0,0" PreviewTextInput="NumberValidationTextBox"/>
 
-            <Button Grid.Row="5" Grid.Column="1" Content="Add" HorizontalAlignment="Right"  VerticalAlignment="Center" Height="32" Width="80" Margin="00,0,10,0"/>
+            <Button Name="BtnModuleAdd" Grid.Row="5" Grid.Column="1" Content="Add" HorizontalAlignment="Right"  VerticalAlignment="Center" Height="32" Width="80" Margin="00,0,10,0" Click="BtnModuleAdd_Click"/>
         </Grid>
 
         <!-- Add Assessment Grid -->
@@ -87,7 +87,7 @@
 
             <Label Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="15">Modules</Label>
 
-            <ListBox Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="10,0,10,10" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC"/>
+            <ListBox Name="LtbxModules" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="10,0,10,10" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC"/>
         </Grid>
 
         <!-- Assessment List Grid -->

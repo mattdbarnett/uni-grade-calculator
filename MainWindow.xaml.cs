@@ -14,21 +14,48 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using System.Text.RegularExpressions;
+using static Module;
 
 namespace uni_grade_calculator
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : MetroWindow
     {
+
+        List<Module> moduleList = new List<Module>();
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        // -- Add Module Grid --
 
-        // -- Add Assessment Grid
+        private void BtnModuleAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (TxtbxModuleName.Text == null || TxtbxModuleName.Text.Length == 0)
+            {
+                MessageBox.Show("Please enter a module name.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+            } 
+            else if (TxtbxModuleCredits.Text == null || TxtbxModuleCredits.Text.Length == 0)
+            {
+                MessageBox.Show("Please enter the module credits.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+            } 
+            else
+            {
+                Module newModule = new Module(TxtbxModuleName.Text, int.Parse(TxtbxModuleCredits.Text));
+
+                moduleList.Add(newModule);
+                LtbxModules.Items.Add(newModule.Format());
+
+                TxtbxModuleName.Clear();
+                TxtbxModuleCredits.Clear();
+            }
+        }
+
+
+        // -- Add Assessment Grid --
+
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             //<--- Reference start (https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf)
