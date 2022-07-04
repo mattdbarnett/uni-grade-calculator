@@ -22,7 +22,7 @@ namespace uni_grade_calculator
     public partial class MainWindow : MetroWindow
     {
 
-        List<Module> moduleList = new List<Module>();
+        List<Module> ModuleList = new List<Module>();
 
         public MainWindow()
         {
@@ -45,12 +45,21 @@ namespace uni_grade_calculator
             {
                 Module newModule = new Module(TxtbxModuleName.Text, int.Parse(TxtbxModuleCredits.Text));
 
-                moduleList.Add(newModule);
+                ModuleList.Add(newModule);
                 LtbxModules.Items.Add(newModule.Format());
 
                 TxtbxModuleName.Clear();
                 TxtbxModuleCredits.Clear();
             }
+        }
+
+
+        // -- List Modules Grid --
+
+        private void LtbxModules_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Module SelectedModule = ModuleList[LtbxModules.SelectedIndex];
+            
         }
 
 
@@ -107,5 +116,6 @@ namespace uni_grade_calculator
             TxtbxMarkValue.Text = PercentValidationTextBox(TxtbxMarkValue.Text);
             TxtbxMarkValue.SelectionStart = TxtbxMarkValue.Text.Length - 1;
         }
+
     }
 }
