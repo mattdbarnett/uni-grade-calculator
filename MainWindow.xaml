@@ -68,12 +68,12 @@
             <TextBox Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="250" Margin="10,0,0,0"/>
 
             <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Weight</Label>
-            <Slider Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="200" Margin="10,0,0,0" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True"/>
-            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0" Foreground="#FFA2A2A2">value</Label>
+            <Slider Name="SliderWeight" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="200" Margin="10,0,0,0" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" ValueChanged="SliderWeight_ValueChanged"/>
+            <TextBox Name="TxtbxWeightValue" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0" Width="45" MaxLength="4" TextAlignment="Right" TextChanged="TxtbxWeightValue_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
 
             <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Mark</Label>
-            <Slider Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="200" Margin="10,0,0,0" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True"/>
-            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0" Foreground="#FFA2A2A2">value</Label>
+            <Slider Name="SliderMark" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="200" Margin="10,0,0,0" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" ValueChanged="SliderMark_ValueChanged" SmallChange="1"/>
+            <TextBox Name="TxtbxMarkValue" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0" Width="45" MaxLength="4" TextAlignment="Right" PreviewTextInput="NumberValidationTextBox" TextChanged="TxtbxMarkValue_TextChanged"/>
 
             <Button Grid.Row="5" Grid.Column="1" Content="Add" HorizontalAlignment="Right"  VerticalAlignment="Center" Height="32" Width="80" Margin="0,0,10,0"/>
         </Grid>
