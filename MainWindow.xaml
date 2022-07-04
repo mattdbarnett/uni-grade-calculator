@@ -65,7 +65,7 @@
             <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" Grid.ColumnSpan="2" Width="127" FontSize="15">Add Assessment</Label>
 
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Name</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="250" Margin="10,0,0,0"/>
+            <TextBox Name="TxtbxAssessmentName" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="250" Margin="10,0,0,0"/>
 
             <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Weight</Label>
             <Slider Name="SliderWeight" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="200" Margin="10,0,0,0" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" ValueChanged="SliderWeight_ValueChanged"/>

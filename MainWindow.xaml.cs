@@ -24,9 +24,21 @@ namespace uni_grade_calculator
 
         List<Module> ModuleList = new List<Module>();
 
+        List<TextBox> AddTextboxesList;
+
+        List<Slider> AddSlidersList;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            TextBox[] addTextboxes = { TxtbxAssessmentName, TxtbxWeightValue, TxtbxMarkValue };
+            AddTextboxesList = new List<TextBox>(addTextboxes);
+            SetAddTextboxesEnabled(false);
+
+            Slider[] addSliders = { SliderMark, SliderWeight };
+            AddSlidersList = new List<Slider>(addSliders);
+            SetAddSlidersEnabled(false);
         }
 
         // -- Add Module Grid --
@@ -59,6 +71,9 @@ namespace uni_grade_calculator
         private void LtbxModules_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Module SelectedModule = ModuleList[LtbxModules.SelectedIndex];
+
+            SetAddTextboxesEnabled(true);
+            SetAddSlidersEnabled(true);
             
         }
 
@@ -115,6 +130,21 @@ namespace uni_grade_calculator
         {
             TxtbxMarkValue.Text = PercentValidationTextBox(TxtbxMarkValue.Text);
             TxtbxMarkValue.SelectionStart = TxtbxMarkValue.Text.Length - 1;
+        }
+
+        private void SetAddTextboxesEnabled(bool input)
+        {
+            foreach (var textbox in AddTextboxesList)
+            {
+                textbox.IsEnabled = input;
+            }
+        }
+        private void SetAddSlidersEnabled(bool input)
+        {
+            foreach (var slider in AddSlidersList)
+            {
+                slider.IsEnabled = input;
+            }
         }
 
     }
