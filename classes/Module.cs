@@ -16,8 +16,8 @@ public class Module
 		Credits = inputCredits;
 
 		// -- TEMP TEST --
-		Assessment TestAssessment = new Assessment("TEST", 20, 20);
-		AddAssessment(TestAssessment);
+		//Assessment TestAssessment = new Assessment("TEST", 20, 20);
+		//AddAssessment(TestAssessment);
 	}
 
 	public string Format()

@@ -34,11 +34,11 @@ namespace uni_grade_calculator
 
             TextBox[] addTextboxes = { TxtbxAssessmentName, TxtbxWeightValue, TxtbxMarkValue };
             AddTextboxesList = new List<TextBox>(addTextboxes);
-            SetAddTextboxesEnabled(false);
 
             Slider[] addSliders = { SliderMark, SliderWeight };
             AddSlidersList = new List<Slider>(addSliders);
-            SetAddSlidersEnabled(false);
+
+            SetAddAssessmentEnabled(false);
         }
 
         // -- Add Module Grid --
@@ -55,10 +55,10 @@ namespace uni_grade_calculator
             } 
             else
             {
-                Module newModule = new Module(TxtbxModuleName.Text, int.Parse(TxtbxModuleCredits.Text));
+                Module NewModule = new Module(TxtbxModuleName.Text, int.Parse(TxtbxModuleCredits.Text));
 
-                ModuleList.Add(newModule);
-                LtbxModules.Items.Add(newModule.Format());
+                ModuleList.Add(NewModule);
+                LtbxModules.Items.Add(NewModule.Format());
 
                 TxtbxModuleName.Clear();
                 TxtbxModuleCredits.Clear();
@@ -70,17 +70,9 @@ namespace uni_grade_calculator
 
         private void LtbxModules_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Module SelectedModule = ModuleList[LtbxModules.SelectedIndex];
+            SetAddAssessmentEnabled(true);
 
-            SetAddTextboxesEnabled(true);
-            SetAddSlidersEnabled(true);
-
-            LtbxAssessments.Items.Clear();
-            foreach (var assessment in SelectedModule.Assessments)
-            {
-                LtbxAssessments.Items.Add(assessment.Format());
-            }
-            
+            UpdateAssessmentListBox();
         }
 
 
@@ -138,18 +130,68 @@ namespace uni_grade_calculator
             TxtbxMarkValue.SelectionStart = TxtbxMarkValue.Text.Length - 1;
         }
 
-        private void SetAddTextboxesEnabled(bool input)
+        private void BtnAssessmentAdd_Click(object sender, RoutedEventArgs e)
+        {
+            String AssessmentName = TxtbxAssessmentName.Text;
+            int AssessmentWeight = int.Parse(TxtbxWeightValue.Text.TrimEnd(new char[] { '%', ' ' }));
+            int AssessmentMark = int.Parse(TxtbxMarkValue.Text.TrimEnd(new char[] { '%', ' ' }));
+
+            if(AssessmentName == null || AssessmentName.Length == 0)
+            {
+                MessageBox.Show("Please enter the assessment name.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if(AssessmentWeight == 0)
+            {
+                MessageBox.Show("Assessment weight cannot be zero.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            Assessment NewAssessment = new Assessment(AssessmentName, AssessmentWeight, AssessmentMark);
+
+            Module SelectedModule = ModuleList[LtbxModules.SelectedIndex];
+
+            SelectedModule.AddAssessment(NewAssessment);
+            UpdateAssessmentListBox();
+            ClearAddAssessment();
+        }
+
+        private void SetAddAssessmentEnabled(bool input)
         {
             foreach (var textbox in AddTextboxesList)
             {
                 textbox.IsEnabled = input;
             }
-        }
-        private void SetAddSlidersEnabled(bool input)
-        {
             foreach (var slider in AddSlidersList)
             {
                 slider.IsEnabled = input;
+            }
+            BtnAssessmentAdd.IsEnabled = input;
+        }
+        
+        private void ClearAddAssessment()
+        {
+            foreach (var textbox in AddTextboxesList)
+            {
+                textbox.Text = string.Empty;
+            }
+            foreach (var slider in AddSlidersList)
+            {
+                slider.Value = 0;
+            }
+        }
+
+        // -- View Assessment Grid --#
+
+        private void UpdateAssessmentListBox()
+        {
+            Module SelectedModule = ModuleList[LtbxModules.SelectedIndex];
+
+            LtbxAssessments.Items.Clear();
+            foreach (var assessment in SelectedModule.Assessments)
+            {
+                LtbxAssessments.Items.Add(assessment.Format());
             }
         }
 
