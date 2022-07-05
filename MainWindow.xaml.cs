@@ -167,6 +167,8 @@ namespace uni_grade_calculator
             SelectedModule.AddAssessment(NewAssessment);
             UpdateAssessmentListBox();
             ClearAddAssessment();
+
+            SelectedModule.CalculatePerctange();
         }
 
         private void SetAddAssessmentEnabled(bool input)
@@ -193,6 +195,7 @@ namespace uni_grade_calculator
                 slider.Value = 0;
             }
         }
+
 
         // -- View Assessment Grid --#
 
