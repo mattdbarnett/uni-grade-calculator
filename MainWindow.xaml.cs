@@ -136,13 +136,13 @@ namespace uni_grade_calculator
             int AssessmentWeight = int.Parse(TxtbxWeightValue.Text.TrimEnd(new char[] { '%', ' ' }));
             int AssessmentMark = int.Parse(TxtbxMarkValue.Text.TrimEnd(new char[] { '%', ' ' }));
 
-            if(AssessmentName == null || AssessmentName.Length == 0)
+            if (AssessmentName == null || AssessmentName.Length == 0)
             {
                 MessageBox.Show("Please enter the assessment name.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if(AssessmentWeight == 0)
+            if (AssessmentWeight == 0)
             {
                 MessageBox.Show("Assessment weight cannot be zero.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -151,6 +151,18 @@ namespace uni_grade_calculator
             Assessment NewAssessment = new Assessment(AssessmentName, AssessmentWeight, AssessmentMark);
 
             Module SelectedModule = ModuleList[LtbxModules.SelectedIndex];
+
+            int WeightTotal = AssessmentWeight;
+            foreach (var assessment in SelectedModule.Assessments)
+            {
+                WeightTotal += assessment.Weight;
+            }
+
+            if (WeightTotal > 100)
+            {
+                MessageBox.Show("Total module weight cannot be higher than 100%.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             SelectedModule.AddAssessment(NewAssessment);
             UpdateAssessmentListBox();
