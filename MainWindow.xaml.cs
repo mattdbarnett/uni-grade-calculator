@@ -74,6 +74,12 @@ namespace uni_grade_calculator
 
             SetAddTextboxesEnabled(true);
             SetAddSlidersEnabled(true);
+
+            LtbxAssessments.Items.Clear();
+            foreach (var assessment in SelectedModule.Assessments)
+            {
+                LtbxAssessments.Items.Add(assessment.Format());
+            }
             
         }
 

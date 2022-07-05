@@ -17,6 +17,6 @@ public class Assessment
 
 	public string Format()
 	{
-		return Name + " (Weight:" + Weight.ToString() + "%, Marks:" + Marks.ToString() + "%)";
+		return Name + " (Weight: " + Weight.ToString() + "%, Marks: " + Marks.ToString() + "%)";
 	}
 }
