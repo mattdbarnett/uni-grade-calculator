@@ -159,7 +159,7 @@ namespace uni_grade_calculator
             ClearAddAssessment();
 
             SelectedModule.CalculatePerctange();
-            Console.WriteLine(SelectedModule.OverallPerctange);
+            //Console.WriteLine(SelectedModule.OverallPercentage);
         }
 
         private void SetAddAssessmentEnabled(bool input)

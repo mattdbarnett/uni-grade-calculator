@@ -8,11 +8,11 @@ public class Module
 
 	public List<Assessment> Assessments { get; set; } = new List<Assessment>();
 
-	public double OverallPerctange { get; set; } // Percentage achieved in total
+	public double OverallPercentage { get; set; } // Percentage achieved in total
 
 	public double CompletedPercentage { get; set; } // Percentage of how much of the module has been completed
 
-	public double AchievedPerctange { get; set; } // Percentage achieved not including not-completed modules
+	public double AchievedPercentage { get; set; } // Percentage achieved not including not-completed modules
 
 	public Module(string inputName, int inputCredits)
 	{
@@ -35,13 +35,13 @@ public class Module
     {
 		// Calculate overall percentage
 		// Shows how much student has achieved so far
-		OverallPerctange = 0;
+		OverallPercentage = 0;
 		foreach (var assessment in Assessments)
         {
 			double WeightPercent = assessment.Weight;
 			WeightPercent /= 100;
 			double CurrentMark = assessment.Mark * WeightPercent;
-			OverallPerctange += CurrentMark;
+			OverallPercentage += CurrentMark;
         }
 
 		// Calculate completed percentage
@@ -54,13 +54,13 @@ public class Module
 
 		// Calculate achieved percentage
 		// Shows what the student is on track to achieve in the module
-		AchievedPerctange = 0;
+		AchievedPercentage = 0;
 		foreach (var assessment in Assessments)
         {
 			double WeightPercent = assessment.Weight;
 			WeightPercent /= CompletedPercentage;
 			double CurrentMark = assessment.Mark * WeightPercent;
-			AchievedPerctange += CurrentMark;
+			AchievedPercentage += CurrentMark;
 		}
     }
 }

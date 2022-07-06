@@ -1,6 +1,8 @@
 ﻿using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Media;
 
 namespace uni_grade_calculator
 {
@@ -12,7 +14,12 @@ namespace uni_grade_calculator
 
         int TotalCredits = 0;
 
+        double TotalOverall;
+
+        double TotalCompleted;
+
         double TotalAchieved;
+
 
         public ResultsWindow(List<Module> moduleList)
         {
@@ -20,6 +27,33 @@ namespace uni_grade_calculator
             ModuleList = moduleList;
             TotalCredits = GetTotalCredits();
             LblOnTrackValue.Content = CalculateAchieved();
+
+            String GradeAchieved = CalculateAchieved();
+            LblOnTrackValue.Content = GradeAchieved;
+
+            switch (GradeAchieved)
+            {
+                case "Fail":
+                    LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Red);
+                    break;
+                case "Third-Class Honours":
+                    LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
+                    break;
+                case "Lower Second-Class Honours":
+                    LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
+                    break;
+                case "Upper Second-Class Honours":
+                    LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
+                    break;
+                case "First-Class Honours":
+                    LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Gold);
+                    break;
+            }
+
+            CalculateOverall();
+            CalculateCompleted();
+
+            SetProgress();
         }
 
         private int GetTotalCredits()
@@ -32,12 +66,40 @@ namespace uni_grade_calculator
             return TotalCredits;
         }
 
+        public void CalculateOverall()
+        {
+            TotalOverall = 0;
+            foreach (Module module in ModuleList)
+            {
+                double ModuleOverallMod = module.OverallPercentage / 100;
+                double ModuleCredits = module.Credits;
+                TotalOverall += ModuleCredits * ModuleOverallMod;
+            }
+
+            TotalOverall = (TotalOverall / TotalCredits) * 100;
+            TotalOverall = Math.Round(TotalOverall);
+        }
+
+        public void CalculateCompleted()
+        {
+            TotalCompleted = 0;
+            foreach (Module module in ModuleList)
+            {
+                double ModuleCompletedMod = module.CompletedPercentage / 100;
+                double ModuleCredits = module.Credits;
+                TotalCompleted += ModuleCredits * ModuleCompletedMod;
+            }
+
+            TotalCompleted = (TotalCompleted / TotalCredits) * 100;
+            TotalCompleted = Math.Round(TotalCompleted);
+        }
+
         public String CalculateAchieved()
         {
             TotalAchieved = 0;
             foreach(Module module in ModuleList)
             {
-                double ModuleAchievedMod = module.AchievedPerctange / 100;
+                double ModuleAchievedMod = module.AchievedPercentage / 100;
                 double ModuleCredits = module.Credits;
                 TotalAchieved += ModuleCredits * ModuleAchievedMod;
             }
@@ -71,6 +133,16 @@ namespace uni_grade_calculator
             }
 
             return "ERROR ???";
+        }
+
+        private void SetProgress()
+        {
+            PBAchieved.Value = TotalAchieved;
+            TBoxAchieved.Text = "If you graduated tomorrow, with only your current work accounted for, you would have achieved " + PBAchieved.Value.ToString() + "% of the possible marks.";
+            PBOverall.Value = TotalOverall;
+            TBoxOverall.Text = "Including the assessments that haven't been marked or submitted yet, you have achieved " + PBOverall.Value.ToString() + "% of the marks in the modules you've started.";
+            PBCompleted.Value = TotalCompleted;
+            TBoxCompleted.Text = "You have completed " + PBCompleted.Value.ToString() + "% of your submitted modules.";
         }
     }
 }
