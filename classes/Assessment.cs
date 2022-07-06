@@ -1,6 +1,4 @@
-﻿using System;
-
-public class Assessment
+﻿public class Assessment
 {
 	public string Name { get; set; }
 
