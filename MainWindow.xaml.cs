@@ -201,5 +201,10 @@ namespace uni_grade_calculator
             }
         }
 
+        private void BtnCalculate_Click(object sender, RoutedEventArgs e)
+        {
+            ResultsWindow resultsWindow = new ResultsWindow(ModuleList);
+            resultsWindow.Show();
+        }
     }
 }

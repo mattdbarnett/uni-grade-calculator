@@ -1,0 +1,24 @@
+﻿<mah:MetroWindow x:Class="uni_grade_calculator.ResultsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:uni_grade_calculator"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="ResultsWindow" Height="300" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="6*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="LblOnTrackLabel"  Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="15" Width="240" Content="You are currently on track for a..."/>
+
+        <Label x:Name="LblOnTrackValue" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="35" Width="480" Content="Upper Second-Class Honours"/>
+    </Grid>
+</mah:MetroWindow>
