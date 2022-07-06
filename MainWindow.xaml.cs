@@ -1,20 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using System.Text.RegularExpressions;
-using static Module;
 
 namespace uni_grade_calculator
 {
@@ -169,6 +159,7 @@ namespace uni_grade_calculator
             ClearAddAssessment();
 
             SelectedModule.CalculatePerctange();
+            //Console.WriteLine(SelectedModule.OverallPercentage);
         }
 
         private void SetAddAssessmentEnabled(bool input)
@@ -210,5 +201,10 @@ namespace uni_grade_calculator
             }
         }
 
+        private void BtnCalculate_Click(object sender, RoutedEventArgs e)
+        {
+            ResultsWindow resultsWindow = new ResultsWindow(ModuleList);
+            resultsWindow.Show();
+        }
     }
 }

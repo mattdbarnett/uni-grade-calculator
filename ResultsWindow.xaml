@@ -1,0 +1,35 @@
+﻿<mah:MetroWindow x:Class="uni_grade_calculator.ResultsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:uni_grade_calculator"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="ResultsWindow" Height="375" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="LblOnTrackLabel"  Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="15" Width="240" Content="You are currently on track for a..."/>
+
+        <Label x:Name="LblOnTrackValue" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="35" Width="480" Content="Upper Second-Class Honours"/>
+
+        <mah:MetroProgressBar Name="PBAchieved" Grid.Row="2" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" VerticalAlignment="Top" Width="480" Value="75"/>
+        <TextBlock Name="TBoxAchieved" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Text="Sample Text"  Width="480" Height="35" Margin="10,37,0,0" Grid.RowSpan="2"/>
+
+        <mah:MetroProgressBar Name="PBOverall" Grid.Row="3" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" VerticalAlignment="Top" Width="480" Value="75"/>
+        <TextBlock Name="TBoxOverall" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Sample Text"  Width="480" Height="35" Margin="10,37,0,0" Grid.RowSpan="2"/>
+        
+        <mah:MetroProgressBar Name="PBCompleted" Grid.Row="4" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" VerticalAlignment="Top" Width="480" Value="75"/>
+        <TextBlock Name="TBoxCompleted" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Sample Text"  Width="480" Height="35" Margin="10,37,0,0" Grid.RowSpan="2"/>
+    </Grid>
+</mah:MetroWindow>

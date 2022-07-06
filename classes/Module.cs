@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class Module
 {
@@ -9,11 +8,11 @@ public class Module
 
 	public List<Assessment> Assessments { get; set; } = new List<Assessment>();
 
-	public double OverallPerctange { get; set; } // Percentage achieved in total
+	public double OverallPercentage { get; set; } // Percentage achieved in total
 
-	public double AchievedPerctange { get; set; } // Percentage achieved not including not-completed modules
+	public double CompletedPercentage { get; set; } // Percentage of how much of the module has been completed
 
-	public double CompletedPercentage { get; set; }	// Percentage of how much of the module has been completed
+	public double AchievedPercentage { get; set; } // Percentage achieved not including not-completed modules
 
 	public Module(string inputName, int inputCredits)
 	{
@@ -34,18 +33,19 @@ public class Module
 
 	public void CalculatePerctange()
     {
-
 		// Calculate overall percentage
-		OverallPerctange = 0;
+		// Shows how much student has achieved so far
+		OverallPercentage = 0;
 		foreach (var assessment in Assessments)
         {
 			double WeightPercent = assessment.Weight;
 			WeightPercent /= 100;
 			double CurrentMark = assessment.Mark * WeightPercent;
-			OverallPerctange += CurrentMark;
+			OverallPercentage += CurrentMark;
         }
 
 		// Calculate completed percentage
+		// Shows how much of the module the student has completed
 		CompletedPercentage = 0;
 		foreach (var assessment in Assessments)
         {
@@ -53,13 +53,14 @@ public class Module
         }
 
 		// Calculate achieved percentage
-		AchievedPerctange = 0;
+		// Shows what the student is on track to achieve in the module
+		AchievedPercentage = 0;
 		foreach (var assessment in Assessments)
         {
 			double WeightPercent = assessment.Weight;
 			WeightPercent /= CompletedPercentage;
 			double CurrentMark = assessment.Mark * WeightPercent;
-			OverallPerctange += CurrentMark;
+			AchievedPercentage += CurrentMark;
 		}
     }
 }
