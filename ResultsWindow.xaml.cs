@@ -14,11 +14,11 @@ namespace uni_grade_calculator
 
         int TotalCredits = 0;
 
-        double TotalOverall;
+        double TotalOverall = 0;
 
-        double TotalCompleted;
+        double TotalCompleted = 0;
 
-        double TotalAchieved;
+        double TotalAchieved = 0;
 
 
         public ResultsWindow(List<Module> moduleList)
