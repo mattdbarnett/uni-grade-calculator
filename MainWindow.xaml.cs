@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
 using System.Text.RegularExpressions;
+using ControlzEx.Theming;
 
 namespace uni_grade_calculator
 {
@@ -21,6 +22,10 @@ namespace uni_grade_calculator
         public MainWindow()
         {
             InitializeComponent();
+
+            // TO-DO: Implement theme sync
+            //ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
+            //ThemeManager.Current.SyncTheme();
 
             TextBox[] addTextboxes = { TxtbxAssessmentName, TxtbxWeightValue, TxtbxMarkValue };
             AddTextboxesList = new List<TextBox>(addTextboxes);
