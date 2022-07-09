@@ -24,10 +24,6 @@ namespace uni_grade_calculator
         {
             InitializeComponent();
 
-            // TO-DO: Implement theme sync
-            //ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
-            //ThemeManager.Current.SyncTheme();
-
             TextBox[] addTextboxes = { TxtbxAssessmentName, TxtbxWeightValue, TxtbxMarkValue };
             AddTextboxesList = new List<TextBox>(addTextboxes);
 
@@ -76,6 +72,12 @@ namespace uni_grade_calculator
             {
                 ShowAssessmentSection();
             }
+        }
+        private void BtnDelMd_Click(object sender, RoutedEventArgs e)
+        {
+            int itemIndex = LtbxModules.SelectedIndex;
+            ModuleList.RemoveAt(itemIndex);
+            LtbxModules.Items.RemoveAt(itemIndex);
         }
 
         private void EnableAddModuleButtons(bool value)
@@ -197,12 +199,20 @@ namespace uni_grade_calculator
 
         private void UpdateAssessmentListBox()
         {
-            Module SelectedModule = ModuleList[LtbxModules.SelectedIndex];
-
-            LtbxAssessments.Items.Clear();
-            foreach (var assessment in SelectedModule.Assessments)
+            if (ModuleList.Count > 0 && LtbxModules.SelectedIndex != -1)
             {
-                LtbxAssessments.Items.Add(assessment.Format());
+                Module SelectedModule = ModuleList[LtbxModules.SelectedIndex];
+
+                LtbxAssessments.Items.Clear();
+                foreach (var assessment in SelectedModule.Assessments)
+                {
+                    LtbxAssessments.Items.Add(assessment.Format());
+                }
+            }
+            else
+            {
+                ClearAddAssessment();
+                EnableAddModuleButtons(false);
             }
         }
 
