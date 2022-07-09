@@ -23,13 +23,13 @@
 
         <Label x:Name="LblOnTrackValue" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="35" Width="480" Content="Upper Second-Class Honours"/>
 
-        <mah:MetroProgressBar Name="PBAchieved" Grid.Row="2" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" VerticalAlignment="Top" Width="480" Value="75"/>
+        <mah:MetroProgressBar Name="PBAchieved" Grid.Row="2" HorizontalAlignment="Left" Height="22" Foreground="#FF3373F2" Margin="10,10,0,0" VerticalAlignment="Top" Width="480" Value="75"/>
         <TextBlock Name="TBoxAchieved" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Text="Sample Text"  Width="480" Height="35" Margin="10,37,0,0" Grid.RowSpan="2"/>
 
-        <mah:MetroProgressBar Name="PBOverall" Grid.Row="3" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" VerticalAlignment="Top" Width="480" Value="75"/>
+        <mah:MetroProgressBar Name="PBOverall" Grid.Row="3" HorizontalAlignment="Left" Height="22" Foreground="#FF3373F2" Margin="10,10,0,0" VerticalAlignment="Top" Width="480" Value="75"/>
         <TextBlock Name="TBoxOverall" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Sample Text"  Width="480" Height="35" Margin="10,37,0,0" Grid.RowSpan="2"/>
-        
-        <mah:MetroProgressBar Name="PBCompleted" Grid.Row="4" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" VerticalAlignment="Top" Width="480" Value="75"/>
+
+        <mah:MetroProgressBar Name="PBCompleted" Grid.Row="4" HorizontalAlignment="Left" Height="22" Foreground="#FF3373F2" Margin="10,10,0,0" VerticalAlignment="Top" Width="480" Value="75"/>
         <TextBlock Name="TBoxCompleted" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Sample Text"  Width="480" Height="35" Margin="10,37,0,0" Grid.RowSpan="2"/>
     </Grid>
 </mah:MetroWindow>

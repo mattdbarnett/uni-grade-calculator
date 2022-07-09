@@ -21,7 +21,6 @@
         </Grid.ColumnDefinitions>
 
 
-
         <!-- Add Module Grid -->
         <Border Name="MAddBorder" Grid.Row="1" Grid.Column="0" Background="#FFFFFFFF" BorderBrush="#FFFFFFFF" BorderThickness="0" CornerRadius="20" Margin="20,20,10,20">
             <Grid Name="GridModuleAdd">
@@ -47,10 +46,10 @@
                 <TextBox Name="TxtbxModuleCredits" Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="100" MaxLength="3" Margin="20,27.5,0,0" PreviewTextInput="NumberValidationTextBox"/>
 
                 <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Width="100" Margin="15,0,0,0">Completed?</Label>
-                <mah:ToggleSwitch Grid.Row="3" VerticalAlignment="Top" Width="70" Height="32" Margin="20,25,0,0" OffContent="" OnContent=""/>
+                <mah:ToggleSwitch Name="SwitchCompleted" Grid.Row="3" VerticalAlignment="Top" Width="70" Height="32" Margin="20,25,0,0" OffContent="" OnContent="" Toggled="SwitchCompleted_Toggled"/>
 
-                <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Width="100" Margin="15,0,0,0" Visibility="Hidden">Total %</Label>
-                <TextBox Grid.Row="4" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="100" MaxLength="3" Margin="20,27.5,0,0" PreviewTextInput="NumberValidationTextBox" Visibility="Hidden"/>
+                <Label Name="LblTotal" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Width="100" Margin="15,0,0,0" Visibility="Hidden">Total %</Label>
+                <TextBox Name="TxtbxTotal" Grid.Row="4" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="100" MaxLength="4" Margin="20,27.5,0,0" PreviewTextInput="NumberValidationTextBox" TextChanged="TxtbxTotal_TextChanged" Text="0%" Visibility="Hidden"/>
 
                 <Button Name="BtnModuleAdd" Grid.Row="4" Content="Add" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="35" Width="100" Margin="0,0,15,15" Click="BtnModuleAdd_Click"/>
             </Grid>
@@ -107,7 +106,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="45" Width="45" Margin="0,0,10,20">
+                <Button Name="BtnClearMd" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="45" Width="45" Margin="0,0,10,20" Click="BtnClearMd_Click">
                     <StackPanel>
                         <Image Source="icons/clear.png" Width="25" />
                     </StackPanel>
