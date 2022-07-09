@@ -6,7 +6,7 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:uni_grade_calculator"
         mc:Ignorable="d"
-        Title="UniCalc" Height="465" Width="1000" TitleCharacterCasing="Normal" ResizeMode="CanMinimize" AllowsTransparency="True" WindowStyle="None" Opacity="0.95">
+        Title="UniCalc" Height="495" Width="1000" TitleCharacterCasing="Normal" ResizeMode="CanMinimize" AllowsTransparency="True" WindowStyle="None" Opacity="0.95">
 
     <!-- Main Grid - Contains all sub-grids -->
     <Grid Name="GridMain" Background="#FFF7F7F7" Margin="0,0,0,0">
@@ -49,8 +49,8 @@
                 <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Width="100" Margin="15,0,0,0">Completed?</Label>
                 <mah:ToggleSwitch Grid.Row="3" VerticalAlignment="Top" Width="70" Height="32" Margin="20,25,0,0" OffContent="" OnContent=""/>
 
-                <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Width="100" Margin="15,0,0,0">Total %</Label>
-                <TextBox Grid.Row="4" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="100" MaxLength="3" Margin="20,27.5,0,0" PreviewTextInput="NumberValidationTextBox"/>
+                <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Width="100" Margin="15,0,0,0" Visibility="Hidden">Total %</Label>
+                <TextBox Grid.Row="4" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="100" MaxLength="3" Margin="20,27.5,0,0" PreviewTextInput="NumberValidationTextBox" Visibility="Hidden"/>
 
                 <Button Name="BtnModuleAdd" Grid.Row="4" Content="Add" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="35" Width="100" Margin="0,0,15,15" Click="BtnModuleAdd_Click"/>
             </Grid>
@@ -68,7 +68,7 @@
                     <RowDefinition Height="3*" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="26" Width="221">Add Assessment</Label>
+                <Label Name="LblAddAssessment" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="26" Width="440">Add Assessment</Label>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="15" Grid.ColumnSpan="2" Width="250">Name</Label>
                 <TextBox Name="TxtbxAssessmentName" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="250" MaxLength="50" Margin="20,27.5,0,0" Grid.ColumnSpan="2"/>
@@ -95,15 +95,21 @@
 
                 <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="26" Width="221">Modules</Label>
 
-                <Button Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="45" Width="45" Margin="0,10,10,0">
+                <Button Name="BtnAddAs" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="45" Width="45" Margin="0,10,10,0" Click="BtnAddAs_Click">
                     <StackPanel>
-                        <Image Source="icons/load.png" Width="25" />
+                        <Image Source="icons/add.png" Width="25" />
                     </StackPanel>
                 </Button>
 
                 <Button Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="45" Width="45" Margin="0,66,10,0">
                     <StackPanel>
-                        <Image Source="icons/save.png" Width="25" />
+                        <Image Source="icons/delete.png" Width="25" />
+                    </StackPanel>
+                </Button>
+
+                <Button Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="45" Width="45" Margin="0,0,10,20">
+                    <StackPanel>
+                        <Image Source="icons/clear.png" Width="25" />
                     </StackPanel>
                 </Button>
                 <ListBox x:Name="LtbxModules" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="20,10,0,20" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" SelectionChanged="LtbxModules_SelectionChanged" Width="385"/>
@@ -115,25 +121,38 @@
             <Grid Name="GridAssessmentList">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="65" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="26" Width="221">Assessments</Label>
 
-                <Button Name="BtnCalculate" Grid.Row="2" Grid.Column="1" Content="Calculate" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="35" Width="190" Margin="0,0,15,15" Click="BtnCalculate_Click"/>
-                <ListBox x:Name="LtbxAssessments" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="20,10,0,0" Background="White" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" Width="385"/>
+                <ListBox x:Name="LtbxAssessments" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="20,10,0,20" Background="White" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" Width="385"/>
 
             </Grid>
         </Border>
+
+        <!-- ToolBar Grid -->
 
         <ToolBarTray Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="1000" DockPanel.Dock="Top">
             <ToolBar Height="40">
                 <Button Command="New" Content="New" />
                 <Button Command="Open" Content="Open" />
-                <Button Command="Save" Content="Save" />     
+                <Button Command="Save" Content="Save" />
+                <Button Command="Help" Content="Help" />
             </ToolBar>
         </ToolBarTray>
+
+        <ToolBar Name="TlbCalc" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Height="50" ToolBarTray.IsLocked="True" Margin="0,0,-12,0">
+            <Border>
+                <Button Name="BtnCalculate" Content="Calculate" Click="BtnCalculate_Click"/>
+            </Border>
+        </ToolBar>
+
+        <ToolBar Name="TlbBack" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Height="50" ToolBarTray.IsLocked="True" Margin="0,0,-12,0" Visibility="Hidden">
+            <Border>
+                <Button Name="BtnBack" Content="Back" Click="BtnBack_Click"/>
+            </Border>
+        </ToolBar>
 
     </Grid>
 

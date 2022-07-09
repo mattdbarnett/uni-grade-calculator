@@ -17,6 +17,9 @@
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="icons\add.png" />
+    <Resource Include="icons\clear.png" />
+    <Resource Include="icons\delete.png" />
     <Resource Include="icons\github.png" />
     <Resource Include="icons\load.png" />
     <Resource Include="icons\save.png" />
@@ -26,6 +29,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="module.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="icons\add.png" />
+    <None Remove="icons\clear.png" />
+    <None Remove="icons\delete.png" />
   </ItemGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />

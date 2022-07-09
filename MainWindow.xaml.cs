@@ -6,6 +6,7 @@ using System.Windows.Input;
 using MahApps.Metro.Controls;
 using System.Text.RegularExpressions;
 using ControlzEx.Theming;
+using System.Diagnostics;
 
 namespace uni_grade_calculator
 {
@@ -33,7 +34,7 @@ namespace uni_grade_calculator
             Slider[] addSliders = { SliderMark, SliderWeight };
             AddSlidersList = new List<Slider>(addSliders);
 
-            SetAddAssessmentEnabled(false);
+            EnableAddModuleButtons(false);
         }
 
         // -- Add Module Grid --
@@ -65,9 +66,21 @@ namespace uni_grade_calculator
 
         private void LtbxModules_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SetAddAssessmentEnabled(true);
-
+            EnableAddModuleButtons(true);
             UpdateAssessmentListBox();
+        }
+
+        private void BtnAddAs_Click(object sender, RoutedEventArgs e)
+        {
+            if(LtbxModules.SelectedIndex != -1)
+            {
+                ShowAssessmentSection();
+            }
+        }
+
+        private void EnableAddModuleButtons(bool value)
+        {
+            BtnAddAs.IsEnabled = value;
         }
 
 
@@ -166,19 +179,6 @@ namespace uni_grade_calculator
             SelectedModule.CalculatePerctange();
             //Console.WriteLine(SelectedModule.OverallPercentage);
         }
-
-        private void SetAddAssessmentEnabled(bool input)
-        {
-            foreach (var textbox in AddTextboxesList)
-            {
-                textbox.IsEnabled = input;
-            }
-            foreach (var slider in AddSlidersList)
-            {
-                slider.IsEnabled = input;
-            }
-            BtnAssessmentAdd.IsEnabled = input;
-        }
         
         private void ClearAddAssessment()
         {
@@ -193,7 +193,7 @@ namespace uni_grade_calculator
         }
 
 
-        // -- View Assessment Grid --#
+        // -- View Assessment Grid --
 
         private void UpdateAssessmentListBox()
         {
@@ -206,10 +206,43 @@ namespace uni_grade_calculator
             }
         }
 
+
+        // -- General Control --
+
         private void BtnCalculate_Click(object sender, RoutedEventArgs e)
         {
             ResultsWindow resultsWindow = new ResultsWindow(ModuleList);
             resultsWindow.Show();
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            ShowModuleSection();
+        }
+
+        private void ShowModuleSection()
+        {
+            MAddBorder.Visibility = Visibility.Visible;
+            MListBorder.Visibility = Visibility.Visible;
+
+            AAddBorder.Visibility = Visibility.Hidden;
+            AListBorder.Visibility = Visibility.Hidden;
+
+            TlbBack.Visibility = Visibility.Hidden;
+            TlbCalc.Visibility = Visibility.Visible;
+        }
+        private void ShowAssessmentSection()
+        {
+            MAddBorder.Visibility = Visibility.Hidden;
+            MListBorder.Visibility = Visibility.Hidden;
+
+            AAddBorder.Visibility = Visibility.Visible;
+            AListBorder.Visibility = Visibility.Visible;
+
+            TlbBack.Visibility = Visibility.Visible;
+            TlbCalc.Visibility = Visibility.Hidden;
+
+            LblAddAssessment.Content = "Add Assessment to " + ModuleList[LtbxModules.SelectedIndex].Name.ToString();
         }
     }
 }
