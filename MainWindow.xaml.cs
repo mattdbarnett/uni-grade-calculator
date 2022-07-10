@@ -8,27 +8,22 @@ using MahApps.Metro.Controls;
 using System.Text.RegularExpressions;
 using TextBox = System.Windows.Controls.TextBox;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace uni_grade_calculator
 {
 
     public partial class MainWindow : MetroWindow
     {
-        List<Module> ModuleList = new List<Module>();
-
-        List<TextBox> AddTextboxesList;
-
-        List<Slider> AddSlidersList;
+        List<Module> ModuleList = new();
+        private ObservableCollection<ModuleDisplay> moduleDisplayList = new ObservableCollection<ModuleDisplay>();
+        public ObservableCollection<ModuleDisplay> ModuleDisplayList { get => moduleDisplayList; set => moduleDisplayList = value; }
 
         public MainWindow()
         {
             InitializeComponent();
 
-            TextBox[] addTextboxes = { TxtbxAssessmentName, TxtbxWeightValue, TxtbxMarkValue };
-            AddTextboxesList = new List<TextBox>(addTextboxes);
-
-            Slider[] addSliders = { SliderMark, SliderWeight };
-            AddSlidersList = new List<Slider>(addSliders);
+            LtbxModules.ItemsSource = ModuleDisplayList;
 
             EnableAddModuleButtons(false);
         }
@@ -60,8 +55,8 @@ namespace uni_grade_calculator
                 }
 
                 ModuleList.Add(NewModule);
-                LtbxModules.Items.Add(NewModule.Format());
 
+                UpdateModuleListBox();
                 ClearAddModule();
             }
         }
@@ -99,6 +94,29 @@ namespace uni_grade_calculator
 
         // -- List Modules Grid --
 
+        public class ModuleDisplay
+        {
+            public string Name { get; set; }
+            public string Percent { get; set; }
+
+            public ModuleDisplay(string inputName, string inputPercent)
+            {
+                Name = inputName;
+
+                Percent = inputPercent;
+            }
+        }
+
+        public void UpdateModuleListBox()
+        {
+            ModuleDisplayList.Clear();
+            foreach(Module module in ModuleList)
+            {
+                ModuleDisplay moduleDisplay = new ModuleDisplay(module.Name, module.AchievedPercentage.ToString() + "%");
+                ModuleDisplayList.Add(moduleDisplay);
+            }
+        }
+
         private void LtbxModules_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EnableAddModuleButtons(true);
@@ -116,7 +134,7 @@ namespace uni_grade_calculator
         {
             int itemIndex = LtbxModules.SelectedIndex;
             ModuleList.RemoveAt(itemIndex);
-            LtbxModules.Items.RemoveAt(itemIndex);
+            UpdateModuleListBox();
         }
 
         private void BtnClearMd_Click(object sender, RoutedEventArgs e)
@@ -127,7 +145,7 @@ namespace uni_grade_calculator
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
                 ModuleList.Clear();
-                LtbxModules.Items.Clear();
+                ModuleDisplayList.Clear();
             }
         }
 
@@ -330,6 +348,7 @@ namespace uni_grade_calculator
             TlbBack.Visibility = Visibility.Hidden;
             TlbCalc.Visibility = Visibility.Visible;
 
+            UpdateModuleListBox();
             ClearAddAssessment();
         }
         private void ShowAssessmentSection()

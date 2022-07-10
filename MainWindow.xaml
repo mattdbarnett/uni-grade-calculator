@@ -111,7 +111,20 @@
                         <Image Source="icons/clear.png" Width="25" />
                     </StackPanel>
                 </Button>
-                <ListBox x:Name="LtbxModules" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="20,10,0,20" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" SelectionChanged="LtbxModules_SelectionChanged" Width="385"/>
+                <ListBox x:Name="LtbxModules" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="20,10,0,20" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" SelectionChanged="LtbxModules_SelectionChanged" Width="385">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,2" Opacity="50">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Right" Text="{Binding Percent}" Margin="0,0,5,0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </Border>
 
