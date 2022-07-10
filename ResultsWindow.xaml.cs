@@ -1,7 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Diagnostics;
 using System.Windows.Media;
 
 namespace uni_grade_calculator
@@ -71,6 +71,7 @@ namespace uni_grade_calculator
             TotalOverall = 0;
             foreach (Module module in ModuleList)
             {
+                Debug.WriteLine(module.Assessments.Count);
                 double ModuleOverallMod = module.OverallPercentage / 100;
                 double ModuleCredits = module.Credits;
                 TotalOverall += ModuleCredits * ModuleOverallMod;
@@ -97,14 +98,22 @@ namespace uni_grade_calculator
         public String CalculateAchieved()
         {
             TotalAchieved = 0;
+            int AchievedCredits = TotalCredits;
             foreach(Module module in ModuleList)
             {
-                double ModuleAchievedMod = module.AchievedPercentage / 100;
-                double ModuleCredits = module.Credits;
-                TotalAchieved += ModuleCredits * ModuleAchievedMod;
+                if (module.Assessments.Count > 0)
+                {
+                    double ModuleAchievedMod = module.AchievedPercentage / 100;
+                    double ModuleCredits = module.Credits;
+                    TotalAchieved += ModuleCredits * ModuleAchievedMod;
+                }
+                else
+                {
+                    AchievedCredits -= module.Credits;
+                }
             }
 
-            TotalAchieved = (TotalAchieved/TotalCredits) * 100;
+            TotalAchieved = (TotalAchieved/AchievedCredits) * 100;
             TotalAchieved = Math.Round(TotalAchieved);
 
             if(TotalAchieved < 40)

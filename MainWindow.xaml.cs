@@ -6,16 +6,14 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
 using System.Text.RegularExpressions;
-using ControlzEx.Theming;
-using System.Diagnostics;
 using TextBox = System.Windows.Controls.TextBox;
+using System.Diagnostics;
 
 namespace uni_grade_calculator
 {
 
     public partial class MainWindow : MetroWindow
     {
-
         List<Module> ModuleList = new List<Module>();
 
         List<TextBox> AddTextboxesList;
@@ -41,11 +39,13 @@ namespace uni_grade_calculator
         {
             if (TxtbxModuleName.Text == null || TxtbxModuleName.Text.Length == 0)
             {
-                System.Windows.MessageBox.Show("Please enter a module name.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Please enter a module name.", 
+                    "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
             } 
             else if (TxtbxModuleCredits.Text == null || TxtbxModuleCredits.Text.Length == 0)
             {
-                System.Windows.MessageBox.Show("Please enter the module credits.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Please enter the module credits.", 
+                    "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
             } 
             else
             {
@@ -53,7 +53,8 @@ namespace uni_grade_calculator
 
                 if(SwitchCompleted.IsOn && TxtbxTotal.Text != "")
                 {
-                    Assessment NewAssessment = new Assessment("Total Score", 100, int.Parse(TxtbxTotal.Text.TrimEnd(new char[] { '%', ' ' })));
+                    Assessment NewAssessment = new Assessment("Total Score", 100, 
+                        int.Parse(TxtbxTotal.Text.TrimEnd(new char[] { '%', ' ' })));
                     NewModule.AddAssessment(NewAssessment);
                     NewModule.CalculatePerctange();
                 }
@@ -115,7 +116,8 @@ namespace uni_grade_calculator
 
         private void BtnClearMd_Click(object sender, RoutedEventArgs e)
         {
-            var result = System.Windows.Forms.MessageBox.Show("Are you sure you want to delete all modules?", "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var result = System.Windows.Forms.MessageBox.Show("Are you sure you want to delete all modules?", 
+                "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
@@ -193,13 +195,15 @@ namespace uni_grade_calculator
 
             if (AssessmentName == null || AssessmentName.Length == 0)
             {
-                System.Windows.MessageBox.Show("Please enter the assessment name.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Please enter the assessment name.", 
+                    "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             if (AssessmentWeight == 0)
             {
-                System.Windows.MessageBox.Show("Assessment weight cannot be zero.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Assessment weight cannot be zero.", 
+                    "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -215,7 +219,8 @@ namespace uni_grade_calculator
 
             if (WeightTotal > 100)
             {
-                System.Windows.MessageBox.Show("Total module weight cannot be higher than 100%.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Total module weight cannot be higher than 100%.", 
+                    "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -224,7 +229,6 @@ namespace uni_grade_calculator
             ClearAddAssessment();
 
             SelectedModule.CalculatePerctange();
-            //Console.WriteLine(SelectedModule.OverallPercentage);
         }
         
         private void ClearAddAssessment()
@@ -266,13 +270,26 @@ namespace uni_grade_calculator
 
         private void BtnCalculate_Click(object sender, RoutedEventArgs e)
         {
-            ResultsWindow resultsWindow = new ResultsWindow(ModuleList);
-            resultsWindow.Show();
+            if (ModuleList.Count > 0)
+            {
+                ResultsWindow resultsWindow = new ResultsWindow(ModuleList);
+                resultsWindow.Show();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Please enter modules.", 
+                    "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             ShowModuleSection();
+        }
+
+        private void TBBtnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://github.com/mattdbarnett/uni-grade-calculator") { UseShellExecute = true });
         }
 
         private void ShowModuleSection()
@@ -297,7 +314,23 @@ namespace uni_grade_calculator
             TlbBack.Visibility = Visibility.Visible;
             TlbCalc.Visibility = Visibility.Hidden;
 
-            LblAddAssessment.Content = "Add Assessment to " + ModuleList[LtbxModules.SelectedIndex].Name.ToString();
+
+
+            LblAddAssessment.Content = "Add Assessment to " + FormatLblAddAssessment(ModuleList[LtbxModules.SelectedIndex].Name.ToString());
+        }
+
+        private String FormatLblAddAssessment(String input)
+        {
+            String result;
+            if(input.Length > 9)
+            {
+                result = input.Substring(0, 6) + "...";
+            }
+            else
+            {
+                result = input;
+            }
+            return result;
         }
     }
 }

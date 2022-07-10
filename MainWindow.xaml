@@ -137,7 +137,7 @@
                 <Button Command="New" Content="New" />
                 <Button Command="Open" Content="Open" />
                 <Button Command="Save" Content="Save" />
-                <Button Command="Help" Content="Help" />
+                <Button Name="TBBtnHelp" Content="Help" Click="TBBtnHelp_Click"  />
             </ToolBar>
         </ToolBarTray>
 
