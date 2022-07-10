@@ -62,10 +62,7 @@ namespace uni_grade_calculator
                 ModuleList.Add(NewModule);
                 LtbxModules.Items.Add(NewModule.Format());
 
-                TxtbxModuleName.Clear();
-                TxtbxModuleCredits.Clear();
-                TxtbxTotal.Clear();
-                SwitchCompleted.IsOn = false;
+                ClearAddModule();
             }
         }
 
@@ -83,6 +80,14 @@ namespace uni_grade_calculator
                 LblTotal.Visibility = Visibility.Hidden;
                 TxtbxTotal.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void ClearAddModule()
+        {
+            TxtbxModuleName.Clear();
+            TxtbxModuleCredits.Clear();
+            TxtbxTotal.Clear();
+            SwitchCompleted.IsOn = false;
         }
 
         private void TxtbxTotal_TextChanged(object sender, TextChangedEventArgs e)
@@ -233,14 +238,9 @@ namespace uni_grade_calculator
         
         private void ClearAddAssessment()
         {
-            foreach (var textbox in AddTextboxesList)
-            {
-                textbox.Text = string.Empty;
-            }
-            foreach (var slider in AddSlidersList)
-            {
-                slider.Value = 0;
-            }
+            TxtbxAssessmentName.Text = "";
+            SliderMark.Value = 0;
+            SliderWeight.Value = 0;
         }
 
 
@@ -273,7 +273,16 @@ namespace uni_grade_calculator
             if (ModuleList.Count > 0)
             {
                 ResultsWindow resultsWindow = new ResultsWindow(ModuleList);
-                resultsWindow.Show();
+                try
+                {
+                    resultsWindow.Show();
+                }
+                catch (InvalidOperationException)
+                {
+                    System.Windows.MessageBox.Show("An error occured when trying to calculate your grade. " +
+                        "Please ensure there is at minimum one module with one marked assessment entered.",
+                    "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
@@ -285,6 +294,24 @@ namespace uni_grade_calculator
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             ShowModuleSection();
+        }
+
+        private void TBBtnNew_Click(Object sender, RoutedEventArgs e)
+        {
+            var result = System.Windows.Forms.MessageBox.Show("Are you sure? You will lose all unsaved progress.",
+                "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                ModuleList.Clear();
+                LtbxModules.Items.Clear();
+                ClearAddModule();
+
+                LtbxAssessments.Items.Clear();
+                ClearAddAssessment();
+
+                ShowModuleSection();
+            }
         }
 
         private void TBBtnHelp_Click(object sender, RoutedEventArgs e)
@@ -302,6 +329,8 @@ namespace uni_grade_calculator
 
             TlbBack.Visibility = Visibility.Hidden;
             TlbCalc.Visibility = Visibility.Visible;
+
+            ClearAddAssessment();
         }
         private void ShowAssessmentSection()
         {

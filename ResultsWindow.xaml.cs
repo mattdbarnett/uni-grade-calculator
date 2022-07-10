@@ -26,7 +26,6 @@ namespace uni_grade_calculator
             InitializeComponent();
             ModuleList = moduleList;
             TotalCredits = GetTotalCredits();
-            LblOnTrackValue.Content = CalculateAchieved();
 
             String GradeAchieved = CalculateAchieved();
             LblOnTrackValue.Content = GradeAchieved;
@@ -71,7 +70,6 @@ namespace uni_grade_calculator
             TotalOverall = 0;
             foreach (Module module in ModuleList)
             {
-                Debug.WriteLine(module.Assessments.Count);
                 double ModuleOverallMod = module.OverallPercentage / 100;
                 double ModuleCredits = module.Credits;
                 TotalOverall += ModuleCredits * ModuleOverallMod;
@@ -113,10 +111,18 @@ namespace uni_grade_calculator
                 }
             }
 
-            TotalAchieved = (TotalAchieved/AchievedCredits) * 100;
-            TotalAchieved = Math.Round(TotalAchieved);
+            if (AchievedCredits > 0)
+            {
+                TotalAchieved = (TotalAchieved / AchievedCredits) * 100;
+                TotalAchieved = Math.Round(TotalAchieved);
+                Debug.WriteLine(TotalAchieved);
+            } 
+            else
+            {
+                this.Close();
+            }
 
-            if(TotalAchieved < 40)
+            if (TotalAchieved < 40)
             {
                 return "Fail";
             }

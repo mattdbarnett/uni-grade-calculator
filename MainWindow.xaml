@@ -134,7 +134,7 @@
 
         <ToolBarTray Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="1000" DockPanel.Dock="Top">
             <ToolBar Height="40">
-                <Button Command="New" Content="New" />
+                <Button Name="TBBtnNew" Content="New" Click="TBBtnNew_Click" />
                 <Button Command="Open" Content="Open" />
                 <Button Command="Save" Content="Save" />
                 <Button Name="TBBtnHelp" Content="Help" Click="TBBtnHelp_Click"  />
