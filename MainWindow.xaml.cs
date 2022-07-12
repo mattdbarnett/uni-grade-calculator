@@ -26,6 +26,7 @@ namespace uni_grade_calculator
             LtbxModules.ItemsSource = ModuleDisplayList;
 
             EnableAddModuleButtons(false);
+            EnableAddAssessmentButtons(false);
         }
 
         // -- Add Module Grid --
@@ -284,14 +285,44 @@ namespace uni_grade_calculator
             }
         }
 
+        private void LtbxAssessments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(LtbxAssessments.SelectedIndex != -1)
+            {
+                EnableAddAssessmentButtons(true);
+            } 
+            else
+            {
+                EnableAddAssessmentButtons(false);
+            }
+        }
+
         private void BtnDelAs_Click(object sender, RoutedEventArgs e)
         {
-
+            Module SelectedModule = ModuleList[LtbxModules.SelectedIndex];
+            int itemIndex = LtbxAssessments.SelectedIndex;
+            SelectedModule.Assessments.RemoveAt(itemIndex);
+            SelectedModule.CalculatePerctange();
+            UpdateAssessmentListBox();
         }
 
         private void BtnClearAs_Click(object sender, RoutedEventArgs e)
         {
+            var result = System.Windows.Forms.MessageBox.Show("Are you sure you want to delete all assessments?",
+                "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                Module SelectedModule = ModuleList[LtbxModules.SelectedIndex];
+                SelectedModule.Assessments.Clear();
+                SelectedModule.CalculatePerctange();
+                LtbxAssessments.Items.Clear();
+            }
+        }
+
+        private void EnableAddAssessmentButtons(bool value)
+        {
+            BtnDelAs.IsEnabled = value;
         }
 
 
