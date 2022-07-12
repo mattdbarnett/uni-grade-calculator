@@ -35,17 +35,17 @@ namespace uni_grade_calculator
                 case "Fail":
                     LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Red);
                     break;
-                case "Third-Class Honours":
+                case "Third Class Honours":
                     LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
                     break;
-                case "Lower Second-Class Honours":
+                case "Lower Second Class Honours":
                     LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
                     break;
-                case "Upper Second-Class Honours":
+                case "Upper Second Class Honours":
                     LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
                     break;
-                case "First-Class Honours":
-                    LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Gold);
+                case "First Class Honours":
+                    LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
                     break;
             }
 

@@ -4,11 +4,10 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Controls;
 using System.Windows.Input;
-using MahApps.Metro.Controls;
 using System.Text.RegularExpressions;
-using TextBox = System.Windows.Controls.TextBox;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using MahApps.Metro.Controls;
 
 namespace uni_grade_calculator
 {
