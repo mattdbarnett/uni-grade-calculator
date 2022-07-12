@@ -20,7 +20,6 @@ namespace uni_grade_calculator
 
         double TotalAchieved = 0;
 
-
         public ResultsWindow(List<Module> moduleList)
         {
             InitializeComponent();
