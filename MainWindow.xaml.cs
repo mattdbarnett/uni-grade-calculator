@@ -123,13 +123,14 @@ namespace uni_grade_calculator
             UpdateAssessmentListBox();
         }
 
-        private void BtnAddAs_Click(object sender, RoutedEventArgs e)
+        private void BtnAddMd_Click(object sender, RoutedEventArgs e)
         {
             if(LtbxModules.SelectedIndex != -1)
             {
                 ShowAssessmentSection();
             }
         }
+
         private void BtnDelMd_Click(object sender, RoutedEventArgs e)
         {
             int itemIndex = LtbxModules.SelectedIndex;
@@ -151,7 +152,7 @@ namespace uni_grade_calculator
 
         private void EnableAddModuleButtons(bool value)
         {
-            BtnAddAs.IsEnabled = value;
+            BtnAddMd.IsEnabled = value;
             BtnDelMd.IsEnabled = value;
         }
 
@@ -283,6 +284,16 @@ namespace uni_grade_calculator
             }
         }
 
+        private void BtnDelAs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnClearAs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
 
         // -- General Control --
 
@@ -335,6 +346,17 @@ namespace uni_grade_calculator
         private void TBBtnHelp_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(new ProcessStartInfo("https://github.com/mattdbarnett/uni-grade-calculator") { UseShellExecute = true });
+        }
+
+        private void TBBtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            var result = System.Windows.Forms.MessageBox.Show("Are you sure? You will lose all unsaved progress.",
+                "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
         }
 
         private void ShowModuleSection()

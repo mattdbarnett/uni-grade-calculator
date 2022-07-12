@@ -40,7 +40,7 @@
                 <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="26" Width="221">Add Module</Label>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="15" Grid.ColumnSpan="2" Width="250">Name</Label>
-                <TextBox Name="TxtbxModuleName" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="250" MaxLength="50" Margin="20,27.5,0,0" Grid.ColumnSpan="2"/>
+                <TextBox Name="TxtbxModuleName" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="250" MaxLength="64" Margin="20,27.5,0,0" Grid.ColumnSpan="2"/>
 
                 <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Width="100" Margin="15,0,0,0">Credits</Label>
                 <TextBox Name="TxtbxModuleCredits" Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="100" MaxLength="3" Margin="20,27.5,0,0" PreviewTextInput="NumberValidationTextBox"/>
@@ -94,7 +94,7 @@
 
                 <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="26" Width="221">Modules</Label>
 
-                <Button Name="BtnAddAs" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="45" Width="45" Margin="0,10,10,0" Click="BtnAddAs_Click">
+                <Button Name="BtnAddMd" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="45" Width="45" Margin="0,10,10,0" Click="BtnAddMd_Click">
                     <StackPanel>
                         <Image Source="icons/add.png" Width="25" />
                     </StackPanel>
@@ -111,16 +111,16 @@
                         <Image Source="icons/clear.png" Width="25" />
                     </StackPanel>
                 </Button>
-                <ListBox x:Name="LtbxModules" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="20,10,0,20" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" SelectionChanged="LtbxModules_SelectionChanged" Width="385">
+                <ListBox x:Name="LtbxModules" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="20,10,0,20" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="LtbxModules_SelectionChanged" Width="385">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="0,2" Opacity="50">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="35"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="{Binding Name}" />
-                                <TextBlock Grid.Column="1" HorizontalAlignment="Right" Text="{Binding Percent}" Margin="0,0,5,0"/>
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding Percent}" Margin="0,0,5,0"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -140,7 +140,21 @@
 
                 <ListBox x:Name="LtbxAssessments" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="20,10,0,20" Background="White" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" Width="385"/>
 
+                <Button Name="BtnDelAs" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="45" Width="45" Margin="0,66,10,0" Click="BtnDelAs_Click">
+                    <StackPanel>
+                        <Image Source="icons/delete.png" Width="25" />
+                    </StackPanel>
+                </Button>
+
+                <Button Name="BtnClearAs" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="45" Width="45" Margin="0,0,10,20" Click="BtnClearAs_Click">
+                    <StackPanel>
+                        <Image Source="icons/clear.png" Width="25" />
+                    </StackPanel>
+                </Button>
+                
             </Grid>
+
+            
         </Border>
 
         <!-- ToolBar Grid -->
@@ -151,6 +165,7 @@
                 <Button Command="Open" Content="Open" />
                 <Button Command="Save" Content="Save" />
                 <Button Name="TBBtnHelp" Content="Help" Click="TBBtnHelp_Click"  />
+                <Button Name="TBBtnExit" Content="Exit" Click="TBBtnExit_Click"  />
             </ToolBar>
         </ToolBarTray>
 
