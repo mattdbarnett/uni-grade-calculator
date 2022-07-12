@@ -1,4 +1,4 @@
-﻿<mah:MetroWindow x:Class="uni_grade_calculator.MainWindow"
+﻿<mah:MetroWindow x:Name="CalcWindow" x:Class="uni_grade_calculator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,115 +6,181 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:uni_grade_calculator"
         mc:Ignorable="d"
-        Title="UniCalc" Height="450" Width="800" ResizeMode="CanMinimize">
+        Title="UniCalc" Height="495" Width="1000" TitleCharacterCasing="Normal" ResizeMode="CanMinimize" AllowsTransparency="True" WindowStyle="None" Opacity="0.95">
 
     <!-- Main Grid - Contains all sub-grids -->
-    <Grid Name="GridMain">
+    <Grid Name="GridMain" Background="#FFF7F7F7" Margin="0,0,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="4*" />
-
+            <RowDefinition Height="40" />
+            <RowDefinition Height="425" />
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*" />
-            <ColumnDefinition/>
-            <ColumnDefinition />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
+
         <!-- Add Module Grid -->
-        <Grid Name="GridModuleAdd" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="29" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="2*" />
-            </Grid.RowDefinitions>
+        <Border Name="MAddBorder" Grid.Row="1" Grid.Column="0" Background="#FFFFFFFF" BorderBrush="#FFFFFFFF" BorderThickness="0" CornerRadius="20" Margin="20,20,10,20">
+            <Grid Name="GridModuleAdd">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="15" Grid.ColumnSpan="2" Width="105">Add Module</Label>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Name</Label>
-            <TextBox Name="TxtbxModuleName" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="250" MaxLength="50" Margin="10,0,0,0"/>
+                <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="26" Width="221">Add Module</Label>
 
-            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Credits</Label>
-            <TextBox Name="TxtbxModuleCredits" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="100" MaxLength="3" Margin="10,0,0,0" PreviewTextInput="NumberValidationTextBox"/>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="15" Grid.ColumnSpan="2" Width="250">Name</Label>
+                <TextBox Name="TxtbxModuleName" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="250" MaxLength="64" Margin="20,27.5,0,0" Grid.ColumnSpan="2"/>
 
-            <Button Name="BtnModuleAdd" Grid.Row="5" Grid.Column="1" Content="Add" HorizontalAlignment="Right"  VerticalAlignment="Center" Height="32" Width="80" Margin="00,0,10,0" Click="BtnModuleAdd_Click"/>
-        </Grid>
+                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Width="100" Margin="15,0,0,0">Credits</Label>
+                <TextBox Name="TxtbxModuleCredits" Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="100" MaxLength="3" Margin="20,27.5,0,0" PreviewTextInput="NumberValidationTextBox"/>
+
+                <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Width="100" Margin="15,0,0,0">Completed?</Label>
+                <mah:ToggleSwitch Name="SwitchCompleted" Grid.Row="3" VerticalAlignment="Top" Width="70" Height="32" Margin="20,25,0,0" OffContent="" OnContent="" Toggled="SwitchCompleted_Toggled"/>
+
+                <Label Name="LblTotal" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Width="100" Margin="15,0,0,0" Visibility="Hidden">Total %</Label>
+                <TextBox Name="TxtbxTotal" Grid.Row="4" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="100" MaxLength="4" Margin="20,27.5,0,0" PreviewTextInput="NumberValidationTextBox" TextChanged="TxtbxTotal_TextChanged" Text="0%" Visibility="Hidden"/>
+
+                <Button Name="BtnModuleAdd" Grid.Row="4" Content="Add" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="35" Width="100" Margin="0,0,15,15" Click="BtnModuleAdd_Click"/>
+            </Grid>
+        </Border>
 
         <!-- Add Assessment Grid -->
-        <Grid Name="GridAssessmentAdd" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,186,0,0" Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="29" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="2*" />
-            </Grid.RowDefinitions>
+        <Border Name="AAddBorder" Grid.Row="1" Grid.Column="0" Background="#FFFFFFFF" BorderBrush="#FFFFFFFF" BorderThickness="0" CornerRadius="20" Margin="20,20,10,20" Visibility="Hidden">
+            <Grid Name="GridAssessmentAdd">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="300" />
-            </Grid.ColumnDefinitions>
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" Grid.ColumnSpan="2" Width="127" FontSize="15">Add Assessment</Label>
+                <Label Name="LblAddAssessment" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="26" Width="440">Add Assessment</Label>
 
-            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Name</Label>
-            <TextBox Name="TxtbxAssessmentName" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="250" Margin="10,0,0,0" MaxLength="50"/>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="15" Grid.ColumnSpan="2" Width="250">Name</Label>
+                <TextBox Name="TxtbxAssessmentName" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="250" MaxLength="50" Margin="20,27.5,0,0" Grid.ColumnSpan="2"/>
 
-            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Weight</Label>
-            <Slider Name="SliderWeight" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="200" Margin="10,0,0,0" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" ValueChanged="SliderWeight_ValueChanged"/>
-            <TextBox Name="TxtbxWeightValue" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0" Width="45" MaxLength="4" TextAlignment="Right" TextChanged="TxtbxWeightValue_TextChanged" PreviewTextInput="NumberValidationTextBox" Text="0%"/>
+                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="15" Grid.ColumnSpan="2" Width="250">Weight</Label>
+                <Slider Name="SliderWeight" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="355" Margin="20,27.5,0,0" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" ValueChanged="SliderWeight_ValueChanged"/>
+                <TextBox Name="TxtbxWeightValue" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,27.5,40,0" Width="45" MaxLength="4" TextAlignment="Right" TextChanged="TxtbxWeightValue_TextChanged" PreviewTextInput="NumberValidationTextBox" Text="0%"/>
 
-            <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">Mark</Label>
-            <Slider Name="SliderMark" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="200" Margin="10,0,0,0" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" ValueChanged="SliderMark_ValueChanged" SmallChange="1"/>
-            <TextBox Name="TxtbxMarkValue" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0" Width="45" MaxLength="4" TextAlignment="Right" PreviewTextInput="NumberValidationTextBox" TextChanged="TxtbxMarkValue_TextChanged" Text="0%"/>
+                <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="15" Grid.ColumnSpan="2" Width="250">Mark</Label>
+                <Slider Name="SliderMark" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="355" Margin="20,27.5,0,0" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" ValueChanged="SliderMark_ValueChanged" SmallChange="1"/>
+                <TextBox Name="TxtbxMarkValue" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,27.5,40,0" Width="45" MaxLength="4" TextAlignment="Right" PreviewTextInput="NumberValidationTextBox" TextChanged="TxtbxMarkValue_TextChanged" Text="0%"/>
 
-            <Button Name="BtnAssessmentAdd" Grid.Row="5" Grid.Column="1" Content="Add" HorizontalAlignment="Right"  VerticalAlignment="Center" Height="32" Width="80" Margin="0,0,10,0" Click="BtnAssessmentAdd_Click"/>
-        </Grid>
+                <Button Name="BtnAssessmentAdd" Grid.Row="5" Content="Add" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="35" Width="100" Margin="0,0,15,15" Click="BtnAssessmentAdd_Click"/>
+            </Grid>
+        </Border>
 
         <!-- Module List Grid -->
-        <Grid Name="GridModuleList" Grid.Row="0" Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="29" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <Border Name="MListBorder" Grid.Row="1" Grid.Column="1" Background="#FFFFFFFF" BorderBrush="#FFFFFFFF" BorderThickness="0" CornerRadius="20" Margin="10,20,20,20">
+            <Grid Name="GridModuleList">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="15">Modules</Label>
+                <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="26" Width="221">Modules</Label>
 
-            <ListBox Name="LtbxModules" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="10,0,10,10" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" SelectionChanged="LtbxModules_SelectionChanged"/>
-        </Grid>
+                <Button Name="BtnAddMd" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="45" Width="45" Margin="0,10,10,0" Click="BtnAddMd_Click">
+                    <StackPanel>
+                        <Image Source="icons/add.png" Width="25" />
+                    </StackPanel>
+                </Button>
+
+                <Button Name="BtnDelMd" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="45" Width="45" Margin="0,66,10,0" Click="BtnDelMd_Click">
+                    <StackPanel>
+                        <Image Source="icons/delete.png" Width="25" />
+                    </StackPanel>
+                </Button>
+
+                <Button Name="BtnClearMd" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="45" Width="45" Margin="0,0,10,20" Click="BtnClearMd_Click">
+                    <StackPanel>
+                        <Image Source="icons/clear.png" Width="25" />
+                    </StackPanel>
+                </Button>
+                <ListBox x:Name="LtbxModules" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="20,10,0,20" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="LtbxModules_SelectionChanged" Width="385">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,2" Opacity="50">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="35"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Right" FontWeight="Bold" Text="{Binding Percent}" Margin="0,0,5,0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
 
         <!-- Assessment List Grid -->
-        <Grid Name="GridAssessmentList" Grid.Column="2" Margin="0,186,0,0" Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="29" />
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+        <Border Name="AListBorder" Grid.Row="1" Grid.Column="1" Background="#FFFFFFFF" BorderBrush="#FFFFFFFF" BorderThickness="0" CornerRadius="20" Margin="10,20,20,20" Visibility="Hidden">
+            <Grid Name="GridAssessmentList">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="15">Assessments</Label>
+                <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,0,0" FontStyle="Normal" FontWeight="Normal" FontSize="26" Width="221">Assessments</Label>
 
-            <ListBox Name="LtbxAssessments" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,0,10,0" Background="White" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC"/>
+                <ListBox x:Name="LtbxAssessments" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="20,10,0,20" Background="White" BorderThickness="1,1,1,1" BorderBrush="#FFCCCCCC" Width="385" SelectionChanged="LtbxAssessments_SelectionChanged"/>
 
-            <Button Name="BtnCalculate" Grid.Row="2" Grid.Column="1" Content="Calculate" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="32" Width="190" Margin="10,0,0,0" Click="BtnCalculate_Click"/>
-            <Button Grid.Row="2" HorizontalAlignment="Right"  VerticalAlignment="Center" Height="45" Width="45" Margin="0,0,70,0">
-                <StackPanel>
-                    <Image Source="icons/save.png" Width="25" />
-                </StackPanel>
-            </Button>
-            <Button Grid.Row="2" HorizontalAlignment="Right"  VerticalAlignment="Center" Height="45" Width="45" Margin="0,0,10,0">
-                <StackPanel>
-                    <Image Source="icons/load.png" Width="25" />
-                </StackPanel>
-            </Button>
+                <Button Name="BtnDelAs" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Top" Height="45" Width="45" Margin="0,66,10,0" Click="BtnDelAs_Click">
+                    <StackPanel>
+                        <Image Source="icons/delete.png" Width="25" />
+                    </StackPanel>
+                </Button>
 
-        </Grid>
+                <Button Name="BtnClearAs" Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="45" Width="45" Margin="0,0,10,20" Click="BtnClearAs_Click">
+                    <StackPanel>
+                        <Image Source="icons/clear.png" Width="25" />
+                    </StackPanel>
+                </Button>
+                
+            </Grid>
+
+            
+        </Border>
+
+        <!-- ToolBar Grid -->
+
+        <ToolBarTray Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="1000" DockPanel.Dock="Top">
+            <ToolBar Height="40">
+                <Button Name="TBBtnNew" Content="New" Click="TBBtnNew_Click" />
+                <Button Command="Open" Content="Open" />
+                <Button Command="Save" Content="Save" />
+                <Button Name="TBBtnHelp" Content="Help" Click="TBBtnHelp_Click"  />
+                <Button Name="TBBtnExit" Content="Exit" Click="TBBtnExit_Click"  />
+            </ToolBar>
+        </ToolBarTray>
+
+        <ToolBar Name="TlbCalc" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Height="50" ToolBarTray.IsLocked="True" Margin="0,0,-12,0">
+            <Border>
+                <Button Name="BtnCalculate" Content="Calculate" Click="BtnCalculate_Click"/>
+            </Border>
+        </ToolBar>
+
+        <ToolBar Name="TlbBack" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center" Height="50" ToolBarTray.IsLocked="True" Margin="0,0,-12,0" Visibility="Hidden">
+            <Border>
+                <Button Name="BtnBack" Content="Back" Click="BtnBack_Click"/>
+            </Border>
+        </ToolBar>
+
     </Grid>
 
 </mah:MetroWindow>

@@ -1,7 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Diagnostics;
 using System.Windows.Media;
 
 namespace uni_grade_calculator
@@ -14,19 +14,17 @@ namespace uni_grade_calculator
 
         int TotalCredits = 0;
 
-        double TotalOverall;
+        double TotalOverall = 0;
 
-        double TotalCompleted;
+        double TotalCompleted = 0;
 
-        double TotalAchieved;
-
+        double TotalAchieved = 0;
 
         public ResultsWindow(List<Module> moduleList)
         {
             InitializeComponent();
             ModuleList = moduleList;
             TotalCredits = GetTotalCredits();
-            LblOnTrackValue.Content = CalculateAchieved();
 
             String GradeAchieved = CalculateAchieved();
             LblOnTrackValue.Content = GradeAchieved;
@@ -36,17 +34,17 @@ namespace uni_grade_calculator
                 case "Fail":
                     LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Red);
                     break;
-                case "Third-Class Honours":
+                case "Third Class Honours":
                     LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
                     break;
-                case "Lower Second-Class Honours":
+                case "Lower Second Class Honours":
                     LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
                     break;
-                case "Upper Second-Class Honours":
+                case "Upper Second Class Honours":
                     LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
                     break;
-                case "First-Class Honours":
-                    LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Gold);
+                case "First Class Honours":
+                    LblOnTrackValue.Foreground = new SolidColorBrush(Colors.Green);
                     break;
             }
 
@@ -97,17 +95,33 @@ namespace uni_grade_calculator
         public String CalculateAchieved()
         {
             TotalAchieved = 0;
+            int AchievedCredits = TotalCredits;
             foreach(Module module in ModuleList)
             {
-                double ModuleAchievedMod = module.AchievedPercentage / 100;
-                double ModuleCredits = module.Credits;
-                TotalAchieved += ModuleCredits * ModuleAchievedMod;
+                if (module.Assessments.Count > 0)
+                {
+                    double ModuleAchievedMod = module.AchievedPercentage / 100;
+                    double ModuleCredits = module.Credits;
+                    TotalAchieved += ModuleCredits * ModuleAchievedMod;
+                }
+                else
+                {
+                    AchievedCredits -= module.Credits;
+                }
             }
 
-            TotalAchieved = (TotalAchieved/TotalCredits) * 100;
-            TotalAchieved = Math.Round(TotalAchieved);
+            if (AchievedCredits > 0)
+            {
+                TotalAchieved = (TotalAchieved / AchievedCredits) * 100;
+                TotalAchieved = Math.Round(TotalAchieved);
+                Debug.WriteLine(TotalAchieved);
+            } 
+            else
+            {
+                this.Close();
+            }
 
-            if(TotalAchieved < 40)
+            if (TotalAchieved < 40)
             {
                 return "Fail";
             }
