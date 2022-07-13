@@ -163,7 +163,7 @@
             <ToolBar Height="40">
                 <Button Name="TBBtnNew" Content="New" Click="TBBtnNew_Click" />
                 <Button Command="Open" Content="Open" />
-                <Button Command="Save" Content="Save" />
+                <Button Name="TBBtnSave"  Content="Save" Click="TBBtnSave_Click"/>
                 <Button Name="TBBtnHelp" Content="Help" Click="TBBtnHelp_Click"  />
                 <Button Name="TBBtnExit" Content="Exit" Click="TBBtnExit_Click"  />
             </ToolBar>

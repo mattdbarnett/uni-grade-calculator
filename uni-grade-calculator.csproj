@@ -21,9 +21,6 @@
     <Resource Include="icons\add.png" />
     <Resource Include="icons\clear.png" />
     <Resource Include="icons\delete.png" />
-    <Resource Include="icons\github.png" />
-    <Resource Include="icons\load.png" />
-    <Resource Include="icons\save.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />

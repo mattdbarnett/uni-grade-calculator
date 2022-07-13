@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 using MahApps.Metro.Controls;
+using System.IO;
 
 namespace uni_grade_calculator
 {
@@ -370,6 +371,28 @@ namespace uni_grade_calculator
                 ClearAddAssessment();
 
                 ShowModuleSection();
+            }
+        }
+
+        private void TBBtnOpen_Click(Object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TBBtnSave_Click(Object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            DialogResult result = folderBrowserDialog.ShowDialog();
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                String path = folderBrowserDialog.SelectedPath;
+                string[] lines =
+                {
+                    "First line", "Second line", "Third line"
+                };
+
+                File.WriteAllLinesAsync(path + "/newsave.unicalc", lines);
             }
         }
 
