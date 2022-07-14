@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.Collections.ObjectModel;
 using MahApps.Metro.Controls;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace uni_grade_calculator
 {
@@ -387,12 +389,35 @@ namespace uni_grade_calculator
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 String path = folderBrowserDialog.SelectedPath;
-                string[] lines =
+                List<string> saveList = new List<string>();
+                foreach (Module module in ModuleList)
                 {
-                    "First line", "Second line", "Third line"
-                };
+                    String newItem = "||MODULE//";
+                    newItem += module.Name + "//";
+                    newItem += module.Credits + "//";
+                    foreach (Assessment assessment in module.Assessments)
+                    {
+                        newItem += assessment.Name + "//";
+                        newItem += assessment.Weight + "//";
+                        newItem += assessment.Mark + "//";
+                    }
+                    saveList.Add(newItem);
+                }
 
-                File.WriteAllLinesAsync(path + "/newsave.unicalc", lines);
+                List<string> encryptedSaveList = new List<string>();
+                foreach (String module in saveList)
+                {
+                    if (OperatingSystem.IsWindows())
+                    {
+                        encryptedSaveList.Add(Convert.ToBase64String(
+                                     ProtectedData.Protect(
+                                     Encoding.Unicode.GetBytes(module),
+                                     null,
+                                     DataProtectionScope.CurrentUser)));
+                    } 
+                }
+
+                File.WriteAllLinesAsync(path + "/newsave.unicalc", encryptedSaveList);
             }
         }
 
