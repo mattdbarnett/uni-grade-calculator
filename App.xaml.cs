@@ -16,7 +16,7 @@ namespace uni_grade_calculator
     {
         public static IConfiguration Config { get; private set; }
 
-        public App()
+       public App()
         {
             Config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
