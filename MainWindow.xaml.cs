@@ -18,6 +18,7 @@ using System.Windows.Forms;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Diagnostics;
+
 using System.Security.Cryptography;
 using MahApps.Metro.Controls;
 
@@ -302,7 +303,7 @@ namespace uni_grade_calculator
         }
 
 
-        // -- View Assessment Grid --
+        // --- View Assessment Grid
 
         // Updates the content in the assessment list box if a module is selected.
         private void UpdateAssessmentListBox()
